@@ -61,7 +61,9 @@ class ImgMediaCard extends React.Component {
     this.state = {
       value: 0,
       open: false,
-      link: this.props.lnk
+      link: this.props.lnk,
+      poploc: "",
+      poptag: ""
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleDetail = this.handleDetail.bind(this);
@@ -87,6 +89,7 @@ class ImgMediaCard extends React.Component {
   handleDetail(e) {
     console.log("delete " + this.state.link);
     this.setState({ open: true });
+
     let that = this;
     axios
       .post("http://localhost:5000/detail", {
@@ -95,6 +98,11 @@ class ImgMediaCard extends React.Component {
       .then(function(response) {
         console.log(response.data);
         that.props.detail(response.data);
+        that.setState({
+          poploc: response.data.location,
+          poptag: response.data.tag
+        });
+        console.log(that.state.poploc + that.state.poptag);
       })
       .catch(err => {
         console.log(err);
@@ -161,11 +169,10 @@ class ImgMediaCard extends React.Component {
               >
                 <div style={getModalStyle()} className={classes.paper}>
                   <Typography variant="h6" id="modal-title">
-                    Text in a modal
+                    Location : {this.state.poploc}
                   </Typography>
                   <Typography variant="subtitle1" id="simple-modal-description">
-                    Duis mollis, est non commodo luctus, nisi erat porttitor
-                    ligula.
+                    Tag :{this.state.poptag}
                   </Typography>
                 </div>
               </Modal>
