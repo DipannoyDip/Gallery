@@ -55,6 +55,7 @@ class GuttersGrid extends React.Component {
   render() {
     const { classes } = this.props;
     const { spacing } = this.state;
+    console.log(this.props.img);
     // var imgarray = [];
     // imgarray = this.props.img;
 
@@ -68,9 +69,12 @@ class GuttersGrid extends React.Component {
             spacing={Number(spacing)}
           >
             {this.props.img.map((value, index) => (
-              <Grid key={index} value={value} item>
+              <Grid key={index} value={value.imgFile} item>
+                {/* {value} */}
                 <ImgMediaCard
-                  lnk={"http://localhost:5000" + value}
+                  lnk={"http://localhost:5000" + value.imgFile}
+                  ttl={value.title}
+                  tg={value.tag}
                   dltfn={this.props.dltfnc}
                   detail={this.props.dtl}
                 />
@@ -78,7 +82,7 @@ class GuttersGrid extends React.Component {
             ))}
           </Grid>
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Paper className={classes.control}>
             <Grid container>
               <Grid item>
@@ -100,7 +104,7 @@ class GuttersGrid extends React.Component {
               </Grid>
             </Grid>
           </Paper>
-        </Grid>
+        </Grid> */}
       </Grid>
     );
   }

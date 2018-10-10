@@ -47,8 +47,9 @@ export default class Homepage extends Component {
       link: "",
       value: 0,
       imgpth: [],
-      poploc: "",
-      poptag: "",
+      poptitle: [],
+      poploc: [],
+      poptag: [],
       c: 0
     };
 
@@ -62,9 +63,17 @@ export default class Homepage extends Component {
     img = [];
     let that = this;
     axios.get("http://localhost:5000/app").then(res => {
+      var imgpath = [];
+      var title = [];
+      var tag = [];
       console.log(res);
       console.log(res.data[17]);
-      that.setState({ imgpth: res.data });
+      for (var i = 0; i < res.data.length; i++) {
+        imgpath.push(res.data[i].imgFile);
+        title.push(res.data[i].title);
+        tag.push(res.data[i].tag);
+      }
+      that.setState({ imgpth: res.data, poptitle: title, poptag: tag });
       //   img = res.data;
     });
   }
@@ -160,6 +169,8 @@ export default class Homepage extends Component {
 
         <GuttersGrid
           img={this.state.imgpth}
+          ttl={this.state.poptitle}
+          tg={this.state.poptag}
           dltfnc={this.handleDlt}
           dtl={this.handleDetail}
         />

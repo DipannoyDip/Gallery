@@ -62,6 +62,7 @@ class ImgMediaCard extends React.Component {
       value: 0,
       open: false,
       link: this.props.lnk,
+      poptitle: "",
       poploc: "",
       poptag: ""
     };
@@ -134,12 +135,9 @@ class ImgMediaCard extends React.Component {
               />
               <CardContent>
                 <Typography gutterBottom variant="headline" component="h2">
-                  Lizard
+                  {this.props.ttl}
                 </Typography>
-                <Typography component="p">
-                  Lizards are a widespread group of squamate reptiles, with over
-                  6,000 species, ranging across all continents except Antarctica
-                </Typography>
+                <Typography component="p">{this.props.tg}</Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
